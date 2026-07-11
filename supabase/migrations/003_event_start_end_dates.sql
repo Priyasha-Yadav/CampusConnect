@@ -31,6 +31,7 @@ BEGIN
         SELECT 1
         FROM pg_constraint
         WHERE conname = 'chk_events_end_after_start'
+          AND conrelid = 'events'::regclass
     ) THEN
         ALTER TABLE events
         ADD CONSTRAINT chk_events_end_after_start

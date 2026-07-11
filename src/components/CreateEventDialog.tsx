@@ -99,7 +99,8 @@ export function CreateEventDialog({ user }: { user: User | null }) {
       setOpen(false);
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Something went wrong. Please try again.");
+      console.error("[CreateEventDialog] Failed to create event:", error);
+      toast.error("Couldn't create the event. Please try again.");
     },
   });
 
