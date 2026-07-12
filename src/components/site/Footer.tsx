@@ -22,6 +22,9 @@ export function Footer() {
           <a href="#" className="hover:underline">
             Discord
           </a>
+          <a href="mailto:support@campusconnect.com" className="hover:underline">
+            Contact Us
+          </a>
         </div>
       </div>
     </footer>
