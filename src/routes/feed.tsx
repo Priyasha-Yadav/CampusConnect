@@ -527,7 +527,7 @@ export default function Feed() {
                 style={{
                   animation: "slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards",
                 }}
-                className="neu-border flex w-full items-center justify-center gap-2 bg-[#FFD93D] hover:bg-[#FFD93D]/90 py-3 text-center font-display text-sm font-bold uppercase transition-all shadow-[4px_4px_0_0_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_#000] active:translate-x-[0px] active:translate-y-[0px] active:shadow-[4px_4px_0_0_#000] cursor-pointer"
+                className="neu-border flex w-full items-center justify-center gap-2 bg-[#FFD93D] hover:bg-[#FFD93D]/90 py-3 text-center font-display text-sm font-bold uppercase transition-all shadow-[4px_4px_0_0_#000] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#000] active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0_0_#000] cursor-pointer"
               >
                 <Sparkles size={16} className="animate-pulse" />
                 New posts available (Refresh)
@@ -607,7 +607,7 @@ export default function Feed() {
                   const postComments: Comment[] = Array.isArray(post.comments)
                     ? post.comments.filter((c) => !c.deleted_at)
                     : [];
-
+                  const shareUrl = `${window.location.origin}/feed?postId=${post.id}`;
                   return (
                     <article
                       id={`post-${post.id}`}
@@ -752,9 +752,8 @@ export default function Feed() {
 
                       <div className="mt-4 flex gap-2 border-t-2 border-black pt-4">
                         <a
-                          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                            `${window.location.origin}${window.location.pathname}#post-${post.id}`,
-                          )}`}
+                          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+
                           target="_blank"
                           rel="noopener noreferrer"
                           className="neu-border px-3 py-2 font-mono text-xs font-bold uppercase transition-colors hover:bg-[#1DA1F2] hover:text-white"
@@ -763,9 +762,7 @@ export default function Feed() {
                         </a>
 
                         <a
-                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-                            `${window.location.origin}${window.location.pathname}#post-${post.id}`,
-                          )}`}
+                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="neu-border px-3 py-2 font-mono text-xs font-bold uppercase transition-colors hover:bg-[#0A66C2] hover:text-white"
@@ -775,7 +772,7 @@ export default function Feed() {
 
                         <a
                           href={`https://wa.me/?text=${encodeURIComponent(
-                            `Check out this post: ${post.content.substring(0, 50)}... - ${window.location.origin}${window.location.pathname}#post-${post.id}`,
+                            `Check out this post: ${post.content.substring(0, 50)}... - ${shareUrl}`,
                           )}`}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -788,15 +785,15 @@ export default function Feed() {
                           type="button"
                           onClick={async () => {
                             try {
-                              const shareUrl = `${window.location.origin}${window.location.pathname}#post-${post.id}`;
                               await navigator.clipboard.writeText(shareUrl);
                               toast.success("Link copied!");
                             } catch (err) {
                               toast.error("Failed to copy link.");
                             }
                           }}
-                          className="neu-border px-3 py-2 font-mono text-xs font-bold uppercase transition-colors hover:bg-lime hover:text-black cursor-pointer"
+                          className="neu-border inline-flex items-center gap-2 px-3 py-2 font-mono text-xs font-bold uppercase transition-colors hover:bg-gray-200"
                         >
+                          <Link2 size={14} />
                           Copy Link
                         </button>
                       </div>
