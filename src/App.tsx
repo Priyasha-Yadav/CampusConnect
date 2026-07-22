@@ -34,6 +34,7 @@ import PrivacyPolicy from "./routes/privacy";
 import TermsOfService from "./routes/terms";
 import PendingClubsAdmin from "./routes/admin.clubs.pending";
 import MessagesRoute from "./routes/messages";
+import ProfileRoute from "./routes/profile.$handle";
 import { NotFoundPage } from "./components/NotFoundPage";
 
 const HEALTH_CHECK_URL =
@@ -113,6 +114,7 @@ const router = createBrowserRouter(
       <Route path="/messages" element={<MessagesRoute />} />
       <Route path="/admin/clubs/pending" element={<PendingClubsAdmin />} />
       <Route path="/directory" element={<Directory />} />
+      <Route path="/profile/:handle" element={<ProfileRoute />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="*" element={<NotFoundPage />} />
